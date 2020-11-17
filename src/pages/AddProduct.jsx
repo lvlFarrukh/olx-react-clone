@@ -3,7 +3,7 @@ import LOGO from '../media/olx_logo.png'
 import './css/addProduct.css'
 
 import { connect } from 'react-redux';
-import { postAdd, setUploadStatus } from '../store/action'
+import { postAdd, setUploadStatus,setUser } from '../store/action'
 import { storage } from '../config/firebase'
 
 
@@ -47,6 +47,11 @@ class AddProduct extends React.Component {
         }
     }
 
+    componentDidMount() {
+        if (this.props.user[0].uid === ""){
+            this.props.history.push("/");
+        }
+    }
     render(){
 
         if (this.props.successUpload){
@@ -88,18 +93,35 @@ class AddProduct extends React.Component {
             obj['price'] = this.state.price;
             obj['state'] = this.state.state;
             obj['City'] = this.state.City;
-            obj['postImages'] = this.state.allImageName;
+            obj['imagesURL'] = this.state.allImageName;
             obj['postDate'] = [date.getDay(), date.getMonth(), date.getFullYear()]
 
-            this.props.postAdd({data: obj})
-            // console.log(this.props.user)
+            this.props.postAdd(obj)
+            // console.log(this.state.allImageName)
+        }
+
+        const getURL = async (storageRef)=> {
+            
+            const UploadImg = new Promise(function(resolve, reject) {
+                storageRef.getDownloadURL().then(function(url) {
+                    resolve(url)
+                })
+            });
+
+            UploadImg
+            .then(data=> {
+                this.setState({
+                    allImageName: [...this.state.allImageName, data]
+                })
+            })
+            
         }
 
         const uploadImage = (file)=> {
             this.setState({progressShow: true});
-            
+            // let imagesUrl = [];
             let imageName = Math.round(Math.random()*1000000000);
-            let imageNames = [...this.state.allImageName, imageName]
+            // let imageNames = [...this.state.allImageName, imageName]
             let storageRef = storage.ref('olx post/'+imageName);
             var task = storageRef.put(file[0]);
 
@@ -112,10 +134,8 @@ class AddProduct extends React.Component {
             },
             ()=> {
                 this.setState({btnDisplay: false})
+                getURL(storageRef)
             })
-
-            this.setState({allImageName: imageNames})            
-
         }
         return(
             <div>
@@ -276,7 +296,6 @@ class AddProduct extends React.Component {
 }
 
 const mapStateToProps = (state) => ({ 
-    postId: state.uploadPostId,
     user: state.auth.userData,
     successUpload: state.adds.successUpload,
 })
@@ -284,6 +303,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch)=> ({
     postAdd: (payload)=> { dispatch(postAdd(payload)) },
     setUploadStatus: ()=> { dispatch(setUploadStatus() )},
+    setUser: (payload)=> { dispatch(setUser(payload)) },
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddProduct);

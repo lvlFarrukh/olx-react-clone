@@ -1,6 +1,7 @@
 const InitialState = {
-    allProduct: {},
+    allProduct: [],
     successUpload: false,
+    sliderAdds: []
 }
 
 export default ( state = InitialState, action ) => {
@@ -9,7 +10,14 @@ export default ( state = InitialState, action ) => {
         case 'INITIALIZEPRODUCT':
             return ({
                 ...state,
-                allProduct: {...state.allProduct, ...action.payload},
+                allProduct: action.payload.adds,
+                sliderAdds: action.payload.sliders
+            })
+
+        case 'SETPRODUCT':
+            return ({
+                ...state,
+                allProduct: [...state.allProduct, action.payload],
                 successUpload: true,
             })
 
@@ -18,6 +26,12 @@ export default ( state = InitialState, action ) => {
                 ...state,
                 successUpload: false
             })
+        
+        // case 'SETSLIDERADDS':
+        //     return ({
+        //         ...state,
+                
+        //     })
 
         default:
             break;
@@ -25,3 +39,5 @@ export default ( state = InitialState, action ) => {
 
     return state;
 }
+
+

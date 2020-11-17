@@ -84,29 +84,43 @@ const login = data => {
 }
 
 
-const postAdd = (payload)=> {
+const addsForSlider = (data)=> {
+    let payload = [];
+    var i,j,chunk = 4;
+    for (i=0,j=data.length; i<j; i+=chunk) {
+        payload.push(data.slice(i,i+chunk));
+    }
+
+    return payload;
     // console.log(payload)
-    db.ref('Adds').push(payload.data)
+    // return (dispatch)=> {
+    //     dispatch({type: "SETSLIDERADDS", payload: payload})
+    // }
+}
+
+
+const postAdd = (payload)=> {
+    let key = db.ref('Adds').push().key;
+    payload['key'] = key;
+    db.ref(`Adds/${key}`).set(payload)
     return (dispatch)=> {
         dispatch({type: "SETPRODUCT", payload: payload})
     }   
 }
 
 const getAllAdds = ()=> {
-
-    const addsPromise = new Promise(function(resolve) {
-        db.ref('Adds').on('value', snapshot=> {
-            resolve(snapshot.val());
-        })        
-    });
-
     return (dispatch)=> {
-        // let adds = [];
-        addsPromise
-        .then((data)=> {
-            // dispatch({type: "INITIALIZEPRODUCT", payload: data})
-        })
-        
+        let adds = [];
+        db.ref('/').child('Adds').on('child_added', snapshot=> {
+            adds.push(snapshot.val())
+        })   
+        setTimeout(()=> { 
+            // letpayload['adds'] = adds;
+            // payload['sliders'] = addsForSlider(adds)
+            dispatch({type: "INITIALIZEPRODUCT", payload: {adds: adds, sliders: addsForSlider(adds)}})
+        },4000)
+
+    
     }
 }
 
@@ -119,4 +133,5 @@ export {
     setUser,
     setUploadStatus,
     getAllAdds,
+    // addsForSlider
 }

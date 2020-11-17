@@ -5,20 +5,30 @@ import { faSearch, faComment, faBell, faAngleDown, faPlus } from '@fortawesome/f
 import LoginModal from './LoginModal'
 
 import { connect } from 'react-redux';
-import { signup, login, setUser } from '../store/action'
+import { signup, login, setUser, getAllAdds } from '../store/action'
 // import $ from "jquery";
 
 import { Link } from "react-router-dom";
 
 class Header extends Component {
-  
-    render(){
+    constructor(){
+        super();
+        this.state = {
+            hasAdds: false,
+        }
+    }
+    
+    async componentDidMount(){
         if (localStorage.getItem('user') !== null && this.props.user[0].uid === ""){
             this.props.setUser(JSON.parse(localStorage.getItem('user')));
+        } 
+
+        if (!this.state.hasAdds){
+            await this.props.getAllAdds()
+            this.setState({ hasAdds: true })
         }
-
-
-        // console.log(this.props.user)
+    }
+    render(){ 
         const loginStyle = {
             display: "inline", 
             textDecoration: "underline",
@@ -97,12 +107,15 @@ class Header extends Component {
 
 const mapStateToProps = (state) => ({ 
     user: state.auth.userData,
+    adds: state.adds.allProduct,
 })
     
 const mapDispatchToProps = (dispatch)=> ({
     signup: (data)=> dispatch(signup(data)),
     login: (data)=> dispatch(login(data)),
     setUser: (payload)=> { dispatch(setUser(payload)) },
+    getAllAdds: ()=> { dispatch(getAllAdds() )},
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

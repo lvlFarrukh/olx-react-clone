@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import ItemCart from './ItemsCart'
 
+import { connect } from 'react-redux'
+
 class AddCarts extends Component {
     render(){
         return(
@@ -11,6 +13,7 @@ class AddCarts extends Component {
                         </div>
                     <div className="row" style={{marginLeft: '0px'}}>
 
+                        {/* <ItemCart />
                         <ItemCart />
                         <ItemCart />
                         <ItemCart />
@@ -20,8 +23,11 @@ class AddCarts extends Component {
                         <ItemCart />
                         <ItemCart />
                         <ItemCart />
-                        <ItemCart />
-                        <ItemCart />
+                        <ItemCart /> */}
+
+                        {this.props.product.map((v,i)=>{
+                            return <ItemCart key={v.key} attr={v}/>
+                        })}
                     
                     </div>
                     <div className="row load-more-btn">
@@ -33,4 +39,12 @@ class AddCarts extends Component {
     }
 }
 
-export default AddCarts
+const mapStateToProps = (state) => ({ 
+    product: state.adds.allProduct, 
+})
+    
+const mapDispatchToProps = (dispatch)=> ({
+    // addsForSlider: (data)=> {dispatch(addsForSlider(data))},
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddCarts);

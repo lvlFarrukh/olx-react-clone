@@ -2,13 +2,41 @@ import React, { Component } from 'react'
 import ItemsCart from './ItemsCart'
 
 import { connect } from 'react-redux'
-import { getAllAdds } from '../store/action'
+// import { addsForSlider } from '../store/action'
 
 
 class Slider extends Component {
+    constructor() {
+        super();
+        this.state = {
+            temparr: [1,2,4],
+            limit: 0,
+            currentState: 0,
+            slider: []
+        }
+    }
+
+    // componentDidMount() {
+    //     console.log(this.props)
+    // }
+
+    // componentWillUpdate() {
+    //     this.setState({
+    //         limit: this.props.SliderAdds.length
+    //     })
+    // }
+
+    // static getDerivedStateFromProps(props, state){
+    //     console.log(props)
+    //     return {
+    //         limit: props.SliderAdds.length,
+    //         slider: props.SliderAdds[0]
+    //     }
+    // }
+
     render(){
-        this.props.getAllAdds()
-        // console.log("Adds==> ", this.props.adds)
+        // console.log(this.state.slider)
+        
         return(
             // New or best recommended slider 
             <section>
@@ -18,13 +46,13 @@ class Slider extends Component {
                         <h6 className="vm">View more</h6>
                     </div>
                     <div className="row" style={{marginLeft: '0px'}}>
-                        
-                        <ItemsCart />
-                        <ItemsCart />
-                        <ItemsCart />
-                        <ItemsCart />
-                        
                     
+                            
+                        {this.state.slider.map((v)=>{
+                            return <ItemsCart key={v.key}/>
+                        })}
+
+
                     </div>
 
                     <div className="row navi-btn">
@@ -44,11 +72,12 @@ class Slider extends Component {
 }
 
 const mapStateToProps = (state) => ({ 
-    adds: state.adds.allProduct 
+    product: state.adds.allProduct, 
+    SliderAdds: state.adds.sliderAdds, 
 })
     
 const mapDispatchToProps = (dispatch)=> ({
-    getAllAdds: ()=> { dispatch(getAllAdds() )},
+    // addsForSlider: (data)=> {dispatch(addsForSlider(data))},
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Slider);

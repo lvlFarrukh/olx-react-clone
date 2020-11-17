@@ -269,7 +269,7 @@ svg.svg-inline--fa.fa-angle-down.fa-w-10.cIcon {
 }
 
 .col-3.items-cart img, .col-4.items-cart img {
-    max-height: 170px;
+    max-height: 125px;
     max-width: 150px;
     margin: 10px;
     /* margin: 0px auto */

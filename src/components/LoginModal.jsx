@@ -21,7 +21,7 @@ class LoginModal extends React.Component{
                         <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">Login Here</h5>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
+                                <span aria-hidden="true">×</span>
                             </button>
                         </div>
                         <div className="modal-body">
