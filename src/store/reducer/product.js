@@ -1,7 +1,9 @@
 const InitialState = {
     allProduct: [],
     successUpload: false,
-    sliderAdds: []
+    sliderAdds: [],
+    allSliderAdds: [],
+    sliderAddsLength: null
 }
 
 export default ( state = InitialState, action ) => {
@@ -11,7 +13,9 @@ export default ( state = InitialState, action ) => {
             return ({
                 ...state,
                 allProduct: action.payload.adds,
-                sliderAdds: action.payload.sliders
+                sliderAdds: action.payload.sliders,
+                allSliderAdds: action.payload.sliderAdds,
+                sliderAddsLength: action.payload.sliderAddsL,
             })
 
         case 'SETPRODUCT':

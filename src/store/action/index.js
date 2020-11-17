@@ -115,12 +115,9 @@ const getAllAdds = ()=> {
             adds.push(snapshot.val())
         })   
         setTimeout(()=> { 
-            // letpayload['adds'] = adds;
-            // payload['sliders'] = addsForSlider(adds)
-            dispatch({type: "INITIALIZEPRODUCT", payload: {adds: adds, sliders: addsForSlider(adds)}})
+            let sliderAdds = addsForSlider(adds);
+            dispatch({type: "INITIALIZEPRODUCT", payload: {adds: adds, sliderAddsL: sliderAdds.length,sliderAdds: sliderAdds, sliders: sliderAdds[0]}})
         },4000)
-
-    
     }
 }
 

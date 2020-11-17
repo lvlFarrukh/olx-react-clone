@@ -8,7 +8,7 @@ class ItemsCart extends Component {
         // console.log(this.props.attr)
         return(
             <div className="col-3 items-cart">
-                <Link to="/productview" state={this.props.attr.price} className="productLink">
+                <Link to="/productview" className="productLink">
                     <div className="cart-img">
                         <img src={this.props.attr.imagesURL[0]} alt="" />
                         <i className="fa fa-heart-o d-gray" aria-hidden="true" />

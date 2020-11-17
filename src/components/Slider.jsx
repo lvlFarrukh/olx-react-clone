@@ -6,13 +6,10 @@ import { connect } from 'react-redux'
 
 
 class Slider extends Component {
-    constructor() {
+    constructor(){
         super();
         this.state = {
-            temparr: [1,2,4],
-            limit: 0,
-            currentState: 0,
-            slider: []
+            slider: [],
         }
     }
 
@@ -26,17 +23,17 @@ class Slider extends Component {
     //     })
     // }
 
-    // static getDerivedStateFromProps(props, state){
-    //     console.log(props)
-    //     return {
-    //         limit: props.SliderAdds.length,
-    //         slider: props.SliderAdds[0]
-    //     }
-    // }
+    static getDerivedStateFromProps(props, state){
+        // console.log(props)
+        return {
+            slider: props.sliderAdds
+        }
+    }
+
+
 
     render(){
-        // console.log(this.state.slider)
-        
+        console.log(this.state.slider)
         return(
             // New or best recommended slider 
             <section>
@@ -47,10 +44,12 @@ class Slider extends Component {
                     </div>
                     <div className="row" style={{marginLeft: '0px'}}>
                     
-                            
-                        {this.state.slider.map((v)=>{
-                            return <ItemsCart key={v.key}/>
-                        })}
+
+                       {this.state.slider.map((v)=> {
+                           return <ItemsCart key={v.key} attr={v}/>
+                       })}     
+                       {/* <ItemsCart /> */}
+                       
 
 
                     </div>
@@ -73,7 +72,7 @@ class Slider extends Component {
 
 const mapStateToProps = (state) => ({ 
     product: state.adds.allProduct, 
-    SliderAdds: state.adds.sliderAdds, 
+    sliderAdds: state.adds.sliderAdds, 
 })
     
 const mapDispatchToProps = (dispatch)=> ({
