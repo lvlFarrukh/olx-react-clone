@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ItemsCart from './ItemsCart'
 
 import { connect } from 'react-redux'
-// import { addsForSlider } from '../store/action'
+import { forwordSlider, backwordSlider } from '../store/action'
 
 
 class Slider extends Component {
@@ -24,7 +24,6 @@ class Slider extends Component {
     // }
 
     static getDerivedStateFromProps(props, state){
-        // console.log(props)
         return {
             slider: props.sliderAdds
         }
@@ -33,7 +32,7 @@ class Slider extends Component {
 
 
     render(){
-        console.log(this.state.slider)
+        // console.log(this.props)
         return(
             // New or best recommended slider 
             <section>
@@ -48,22 +47,20 @@ class Slider extends Component {
                        {this.state.slider.map((v)=> {
                            return <ItemsCart key={v.key} attr={v}/>
                        })}     
-                       {/* <ItemsCart /> */}
                        
 
 
                     </div>
 
-                    <div className="row navi-btn">
+                    <div className="row navi-btn" onClick={()=> {this.props.backwordSlider(this.props.allSliderAdds,this.props.currentSlider,this.props.sliderAddsLength)}}>
                         <div className="l-btn">
                             <i className="fa fa-angle-left" aria-hidden="true" />
                         </div>
-                        <div className="r-btn">
+                        <div className="r-btn" onClick={()=> {this.props.forwordSlider(this.props.allSliderAdds,this.props.currentSlider,this.props.sliderAddsLength)}}>
                             <i className="fa fa-angle-right" aria-hidden="true" />
                         </div>
                     </div>
                 </div>
-                {/* <button onClick={()=>{console.log(this.props)}}>Check data</button> */}
             </section>
 
         )
@@ -72,11 +69,15 @@ class Slider extends Component {
 
 const mapStateToProps = (state) => ({ 
     product: state.adds.allProduct, 
-    sliderAdds: state.adds.sliderAdds, 
+    sliderAdds: state.adds.sliderAdds,
+    sliderAddsLength: state.adds.sliderAddsLength,
+    allSliderAdds: state.adds.allSliderAdds,
+    currentSlider: state.adds.currentSlider,
 })
     
 const mapDispatchToProps = (dispatch)=> ({
-    // addsForSlider: (data)=> {dispatch(addsForSlider(data))},
+    forwordSlider: (allSliderAdds, currentSlider, sliderAddsLength)=> {dispatch(forwordSlider(allSliderAdds, currentSlider, sliderAddsLength))},
+    backwordSlider: (allSliderAdds, currentSlider, sliderAddsLength)=> {dispatch(backwordSlider(allSliderAdds, currentSlider, sliderAddsLength))},
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Slider);

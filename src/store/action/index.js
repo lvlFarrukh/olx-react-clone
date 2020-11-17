@@ -116,11 +116,26 @@ const getAllAdds = ()=> {
         })   
         setTimeout(()=> { 
             let sliderAdds = addsForSlider(adds);
-            dispatch({type: "INITIALIZEPRODUCT", payload: {adds: adds, sliderAddsL: sliderAdds.length,sliderAdds: sliderAdds, sliders: sliderAdds[0]}})
+            dispatch({type: "INITIALIZEPRODUCT", payload: {adds: adds, sliderAddsL: sliderAdds.length - 1,sliderAdds: sliderAdds, sliders: sliderAdds[0]}})
         },4000)
     }
 }
 
+// --------------------- Slider Update --------------------
+
+const forwordSlider = (allSliderAdds, currentSlider, sliderAddsLength)=>{
+    let newSlide = currentSlider < sliderAddsLength ? currentSlider + 1 : 0
+    return (dispatch)=> {
+        dispatch({ type: "CHANGESLIDE", payload: {slide: allSliderAdds[newSlide], currentSlider: newSlide} });
+    }
+}
+
+const backwordSlider = (allSliderAdds, currentSlider, sliderAddsLength)=>{
+    let newSlide = currentSlider === 0 ? sliderAddsLength : currentSlider - 1;
+    return (dispatch)=> {
+        dispatch({ type: "CHANGESLIDE", payload: {slide: allSliderAdds[newSlide], currentSlider: newSlide} });
+    }
+}
 
 export {
     setState,
@@ -130,5 +145,6 @@ export {
     setUser,
     setUploadStatus,
     getAllAdds,
-    // addsForSlider
+    forwordSlider,
+    backwordSlider
 }

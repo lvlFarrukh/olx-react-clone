@@ -13,19 +13,7 @@ class AddCarts extends Component {
                         </div>
                     <div className="row" style={{marginLeft: '0px'}}>
 
-                        {/* <ItemCart />
-                        <ItemCart />
-                        <ItemCart />
-                        <ItemCart />
-                        <ItemCart />
-                        <ItemCart />
-                        <ItemCart />
-                        <ItemCart />
-                        <ItemCart />
-                        <ItemCart />
-                        <ItemCart /> */}
-
-                        {this.props.product.map((v,i)=>{
+                        {this.props.product.map((v)=>{
                             return <ItemCart key={v.key} attr={v}/>
                         })}
                     

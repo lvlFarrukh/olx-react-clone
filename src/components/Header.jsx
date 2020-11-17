@@ -7,7 +7,6 @@ import LoginModal from './LoginModal'
 import { connect } from 'react-redux';
 import { signup, login, setUser, getAllAdds } from '../store/action'
 // import $ from "jquery";
-
 import { Link } from "react-router-dom";
 
 class Header extends Component {
@@ -68,7 +67,9 @@ class Header extends Component {
                 <div className="container-fluid">
                 <div className="col">
                     <div>
-                    <img className="logo" src={LOGO} alt="" width="45px" height="25px" />
+                    <Link to="/">
+                        <img className="logo" src={LOGO} alt="" width="45px" height="25px"/>
+                    </Link>
                     </div>
                     <div className="search-l"> 
                     <FontAwesomeIcon icon={faSearch} className="sIcon"/>

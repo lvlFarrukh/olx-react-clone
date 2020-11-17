@@ -3,7 +3,8 @@ const InitialState = {
     successUpload: false,
     sliderAdds: [],
     allSliderAdds: [],
-    sliderAddsLength: null
+    sliderAddsLength: null,
+    currentSlider: 0
 }
 
 export default ( state = InitialState, action ) => {
@@ -31,11 +32,12 @@ export default ( state = InitialState, action ) => {
                 successUpload: false
             })
         
-        // case 'SETSLIDERADDS':
-        //     return ({
-        //         ...state,
-                
-        //     })
+        case 'CHANGESLIDE':
+            return ({
+                ...state,
+                sliderAdds: action.payload.slide,
+                currentSlider: action.payload.currentSlider,
+            })
 
         default:
             break;

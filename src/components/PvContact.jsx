@@ -1,7 +1,9 @@
 import React from 'react'
 
 class PvContact extends React.Component {
+   
     render() {
+        // console.log(this.props.uid)
         return(
 
             <div className="pv-sellerDesp">
@@ -29,7 +31,7 @@ class PvContact extends React.Component {
                 <div>
                     <div className="row pv-sd-div">
                         <div className="pv-sd-ficon">
-                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <i className="fa fa-phone" aria-hidden="true"></i>
                         </div>
                         <div className="pv-sd-num">
                             <span>** *** ****</span>

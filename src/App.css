@@ -295,11 +295,14 @@ svg.svg-inline--fa.fa-angle-down.fa-w-10.cIcon {
     font-weight: bolder;
     margin-top: 6px;
     margin-bottom: 0px;
+    padding-left: 10px;
 }
 
 .cart-detail p {
     margin: 0px;
     font-size: 15px;
+    padding-left: 10px;
+
 }
 
 p.l-gray.fl {
@@ -323,10 +326,14 @@ h6.vm {
     background-color: #ebeeef;
     /* border: 1px solid #677e85; */
     height: 68px;
-    width: 38px;
+    width: 30px;
     border-radius: 2px;
     cursor: pointer;
     box-shadow: 0px 0px 2px 0px rgba(50, 50, 50, 0.56);
+}
+
+.l-btn:hover, .r-btn:hover{
+    box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.56);
 }
 
 
@@ -338,7 +345,7 @@ h6.vm {
 
 .r-btn {
     float: right;
-    margin-left: 93%;
+    margin-left: 95%;
 }
 
 
@@ -650,7 +657,8 @@ i.fa.fa-heart-o.iv-cart-icon {
 }
 
 .pv-img-slider-div > div, .pv-img-slider-div > div > img {
-    height: 100%;
+    height: 96%;
+    margin: 9px;
 }
 
 .pv-img-slider-btn {
@@ -669,8 +677,12 @@ span.pv-btn-l, span.pv-btn-r {
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.116);
     padding: 0px 18px;
+    cursor: pointer;
 }
 
+span.pv-btn-l:hover, span.pv-btn-r:hover{
+    box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.56);
+}
 .pv-str-img {
     margin-left: 50px;
 }
@@ -703,10 +715,12 @@ span.pv-btn-l, span.pv-btn-r {
 .pv-str-h h3 {
     font-weight: 600;
     font-size: 1.8vw;
+    margin-bottom: 30px;
 }
 
 .pv-str-p p {
-    line-height: 5px;
+    margin-top: 10px;
+    line-height: 15px;
 }
 
 .pv-rate {

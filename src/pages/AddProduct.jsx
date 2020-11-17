@@ -1,6 +1,7 @@
 import React from 'react'
 import LOGO from '../media/olx_logo.png'
 import './css/addProduct.css'
+import { Link } from "react-router-dom";
 
 import { connect } from 'react-redux';
 import { postAdd, setUploadStatus,setUser } from '../store/action'
@@ -142,7 +143,9 @@ class AddProduct extends React.Component {
 
                 <header className="post__header">
                     <i className="fa fa-arrow-left" aria-hidden="true" onClick={()=> { this.props.history.goBack() }}></i>
-                    <img src={LOGO} alt=""/>
+                    <Link to="/">
+                        <img src={LOGO} alt=""/>
+                    </Link>
                 </header>
 
                 <section className="container post__form">

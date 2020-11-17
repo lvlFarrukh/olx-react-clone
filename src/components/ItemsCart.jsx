@@ -5,10 +5,17 @@ import { Link } from "react-router-dom";
 
 class ItemsCart extends Component {
     render() {
-        // console.log(this.props.attr)
+        // console.log(this.props)
         return(
             <div className="col-3 items-cart">
-                <Link to="/productview" className="productLink">
+
+                <Link to={{
+                            pathname: '/productview',
+                            state: {
+                                addDetail: this.props.attr
+                            }
+                        }}className="productLink">
+
                     <div className="cart-img">
                         <img src={this.props.attr.imagesURL[0]} alt="" />
                         <i className="fa fa-heart-o d-gray" aria-hidden="true" />

@@ -2,6 +2,7 @@ import React from 'react'
 
 import LOGO from '../media/olx_logo.png'
 
+
 // import components
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -13,7 +14,7 @@ import PvContact from '../components/PvContact'
 
 class ProductView extends React.Component{
     render() {
-        console.log(this.props)
+        // console.log(this.props.location.state.addDetail)
         return(
             <div>
                 
@@ -28,14 +29,19 @@ class ProductView extends React.Component{
 
                             <div className="col-8">
                               
-                              <PVSliderAndDescription images={LOGO}/>
+                              <PVSliderAndDescription description={this.props.location.state.addDetail.description.split(". ")} images={this.props.location.state.addDetail.imagesURL}/>
 
                             </div>
 
                             <div className="col-4">
 
-                                <PvRate/>
-                                <PvContact images={LOGO}/>
+                                <PvRate title={this.props.location.state.addDetail.title}
+                                        price={this.props.location.state.addDetail.price}
+                                        date={this.props.location.state.addDetail.postDate.join("-")} 
+                                        location={`${this.props.location.state.addDetail.state}, ${this.props.location.state.addDetail.City}`}
+                                />
+                                
+                                <PvContact uid={this.props.location.state.addDetail.uid} images={LOGO}/>
 
                             </div>
 
