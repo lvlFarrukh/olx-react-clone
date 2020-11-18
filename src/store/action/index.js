@@ -137,6 +137,11 @@ const backwordSlider = (allSliderAdds, currentSlider, sliderAddsLength)=>{
     }
 }
 
+const changeItemsView = (val)=> {
+    return (dispatch)=>{
+        dispatch({ type: "CHANGEITEMVIEW", payload: val})
+    }
+}
 export {
     setState,
     signup,
@@ -146,5 +151,6 @@ export {
     setUploadStatus,
     getAllAdds,
     forwordSlider,
-    backwordSlider
+    backwordSlider,
+    changeItemsView
 }

@@ -8,7 +8,7 @@ class Adds extends Component {
             <section>
                 <div className="jumbotron jumbotron-fluid">
                     <div className="container">
-                    <h1 className="display-4">Comming soon</h1>
+                    <h1 className="display-4">Coming soon</h1>
                     <p className="lead">This section is for Advertisment</p>
                     </div>
                 </div>

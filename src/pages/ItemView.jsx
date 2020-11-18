@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux';
+
 
 // import Components
 import Header from '../components/Header'
@@ -11,11 +13,37 @@ import InputPriceAndArea from '../components/InputPriceAndArea'
 import SelectorCategory from '../components/SelectorCategory'
 import CheckBoxCategory from '../components/CheckBoxCategory'
 import ActionBar from '../components/ActionBar';
-// import SequenceView from '../components/SequenceView';
+import SequenceView from '../components/SequenceViewCart';
 import TitleViewCart from '../components/TitleViewCart';
+import GridItemView from '../components/GridItemView';
 
 class ItemView extends React.Component {
+    constructor(){
+        super();
+        this.state = {
+            filterAdds: [],
+            addsLength: 0,
+        }
+    }
+    
+    componentDidMount() {
+        const filterAddsData = ()=> {
+            let filerAdds = this.props.location.state.allAdds.filter((v)=>{
+                return ( v.City.toLowerCase() === this.props.location.state.location.toLowerCase()
+                || v.state.toLowerCase() === this.props.location.state.location.toLowerCase()) 
+                    && (v.catagory.toLowerCase() === this.props.location.state.search.toLowerCase()
+                    || v.title.toLowerCase().includes(this.props.location.state.search.toLowerCase()) )
+            })
+
+            this.setState({
+                filterAdds: filerAdds,
+                addsLength: filerAdds.length
+            })
+        }
+        filterAddsData()    
+    }
     render() {
+       
         return(
             <div>
 
@@ -30,7 +58,7 @@ class ItemView extends React.Component {
                         </div>
 
                         <div className="row title-IV">
-                            <h3>Motorcycles in Kala Khatai Road</h3>
+                            <h3>{`${this.props.location.state.search.charAt(0).toUpperCase() + this.props.location.state.search.slice(1)} in ${this.props.location.state.location}`}</h3>
                         </div>
 
 
@@ -64,7 +92,7 @@ class ItemView extends React.Component {
                                 <div className="row ab-main">
                                     <div>
                                         <div className="carts-section">
-                                            <p>7 ads in <span>Kala Khatai Road</span></p>
+                                            <p>{this.state.addsLength} ads in <span>{this.props.location.state.location}.</span></p>
                                         </div>
                                     </div>
 
@@ -79,12 +107,13 @@ class ItemView extends React.Component {
                                 {/* cart Show case */}
 
                                 <div className="row">
-
-                                    <TitleViewCart/>
-                                    <TitleViewCart/>
-                                    <TitleViewCart/>
-                                    <TitleViewCart/>
-                                    <TitleViewCart/>
+                                
+                                    {this.props.productView === 0 ? this.state.filterAdds.map((v, i)=> { return <SequenceView key={i} attr={v}/> }) 
+                                    : this.props.productView === 1 ? this.state.filterAdds.map((v, i)=> { return <GridItemView key={i} attr={v}/> }) 
+                                    : this.state.filterAdds.map((v, i)=> { return <TitleViewCart key={i} attr={v}/> })}
+                                    
+                                    
+                                    
 
                                 </div>    
                     
@@ -101,4 +130,12 @@ class ItemView extends React.Component {
     }
 }
 
-export default ItemView
+const mapStateToProps = (state) => ({ 
+    adds: state.adds.allProduct,
+    productView: state.adds.productView
+})
+    
+const mapDispatchToProps = (dispatch)=> ({
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ItemView);

@@ -14,6 +14,8 @@ class Header extends Component {
         super();
         this.state = {
             hasAdds: false,
+            locationInput: "",
+            searching: ""
         }
     }
     
@@ -28,6 +30,7 @@ class Header extends Component {
         }
     }
     render(){ 
+        // console.log(this.props)
         const loginStyle = {
             display: "inline", 
             textDecoration: "underline",
@@ -73,22 +76,31 @@ class Header extends Component {
                     </div>
                     <div className="search-l"> 
                     <FontAwesomeIcon icon={faSearch} className="sIcon"/>
-                    <input list="browsers" name="myBrowser" placeholder="Search city,area or loc..." />
-                    <datalist id="browsers">
-                        <option value="Chrome">
-                        </option><option value="Firefox">
-                        </option><option value="Internet Explorer">
-                        </option><option value="Opera">
-                        </option><option value="Safari">
-                        </option><option value="Microsoft Edge">
-                        </option></datalist>
+                    <input onChange={(e)=> {this.setState({locationInput: e.target.value})}} list="location" name="myBrowser" placeholder="Search city,area or loc..." />
+                        <datalist id="location">
+                            <option value="Karachi"></option>
+                            <option value="Sindh"></option>
+                            <option value="Punjab"></option>
+                            <option value="Balochistan"></option>
+                            <option value="Islamabad"></option>
+                            <option value="hydrabad"></option>
+                            <option value="lahore"></option>
+                            <option value="chakwal"></option>
+                        </datalist>
                     </div>
                     <div className="input-group main-search">
-                        <input type="text" placeholder="Find Cars, Mobile, Phones or more..." />
+                        <input onChange={(e)=> {this.setState({searching: e.target.value})}} type="text" placeholder="Find Cars, Mobile, Phones or more..." />
                         <div className="input-group-append">
-                            <button className="btn btn-outline-secondary" type="button">
-                                <FontAwesomeIcon icon={faSearch} style={{fontSize: '25px', color: 'white'}} />
-                            </button>
+                            <Link to={{
+                                pathname: "/items",
+                                state: {location: this.state.locationInput,
+                                        search: this.state.searching,
+                                        allAdds: this.props.adds}
+                            }}>
+                                <button className="btn btn-outline-secondary main-search__btn" type="button">
+                                    <FontAwesomeIcon icon={faSearch} style={{fontSize: '25px', color: 'white'}} />
+                                </button>
+                            </Link>
                         </div>
                     </div>
 

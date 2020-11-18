@@ -1,28 +1,45 @@
 import React, { Component } from 'react'
+import { Link } from "react-router-dom";
 
-class SequenceView extends Component {
+
+class SequenceViewCart extends Component {
     render() {
         return(
             <div className="row main-list-cart">
-                <Link to="/productview" className="productLink">
-                    <div className="col-4 individual-cart">
-                        <img width="100%" height="100%" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" alt=""/>
+                
+                    <div className="col-4 individual-cart setImg">
+                   
+                    <Link to={{
+                            pathname: '/productview',
+                            state: {
+                                addDetail: this.props.attr
+                            }
+                        }}className="productLink">
 
+                            <img height="200px" src={this.props.attr.imagesURL[0]} alt=""/>
+                        </Link>
                     </div>
-
+                    
                     <div className="col-8 individual-cart">
                         <div className="cart-detail">
-                            <i className="fa fa-heart-o iv-cart-icon" aria-hidden="true" />
-                            <h3>Rs 7,500,000</h3>
-                            <p>2 Bids-2 Ba-1000 Square Feet</p>
-                            <p className="l-gray">Double bed, kitchen, tv lounch falat for...</p>
-                            <p className="l-gray id-fl">TODAY</p>
+                            <Link to={{
+                                pathname: '/productview',
+                                state: {
+                                    addDetail: this.props.attr
+                                }
+                            }}className="productLink">
+                                <i className="fa fa-heart-o iv-cart-icon" aria-hidden="true" />
+                                <h3>Rs: {this.props.attr.price}</h3>
+                                <p>{this.props.attr.title}</p>
+                                <p className="l-gray">{this.props.attr.description}</p>
+                                <p className="l-gray id-fl">{this.props.attr.postDate[0]}-{this.props.attr.postDate[1]}-{this.props.attr.postDate[2]}</p>
+                            </Link>
                         </div>
                     </div>
-                </Link>
+                
             </div>
         );
     }
 }
 
-export default SequenceView
+export default SequenceViewCart

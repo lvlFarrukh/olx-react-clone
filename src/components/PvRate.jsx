@@ -8,7 +8,7 @@ class PvRate extends React.Component {
                 <div className="row">
                     <div className="pv-rate-val">
                         <h4>
-                            {this.props.price}
+                            Rs: {this.props.price}
                         </h4>
                     </div>
 

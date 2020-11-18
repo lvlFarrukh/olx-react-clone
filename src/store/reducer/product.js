@@ -4,7 +4,9 @@ const InitialState = {
     sliderAdds: [],
     allSliderAdds: [],
     sliderAddsLength: null,
-    currentSlider: 0
+    currentSlider: 0,
+    productView: 0,
+
 }
 
 export default ( state = InitialState, action ) => {
@@ -37,6 +39,12 @@ export default ( state = InitialState, action ) => {
                 ...state,
                 sliderAdds: action.payload.slide,
                 currentSlider: action.payload.currentSlider,
+            })
+        
+        case 'CHANGEITEMVIEW':
+            return ({
+                ...state,
+                productView: action.payload
             })
 
         default:

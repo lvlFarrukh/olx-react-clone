@@ -85,14 +85,20 @@ header > div > div {
 
 }
 
-.main-search > div > button {
-    background-color: #103034;
-    border-color: #103034   ;
+.main-search__btn {
+    background-color: #103034 !important;
+    border-color: #103034 !important;
     margin-top: 4px;
     width: 50px;
     height: 45px;
-    position: fixed;
+    position: relative;
+    right: 5px;
 }
+
+.main-search__btn:hover {
+    background-color: #23585f !important
+}
+
 
 .noti-icons {
     font-size: 22px;
@@ -256,8 +262,17 @@ svg.svg-inline--fa.fa-angle-down.fa-w-10.cIcon {
     margin: 10px;
 }
 
+.setImg {
+    text-align: center;
+}
+
+.productLink {
+    color: black;
+}
+
 .productLink:hover {
     text-decoration: none;
+    color: rgb(73, 70, 70);
 }
 
 .d-gray {
@@ -611,8 +626,9 @@ p.l-gray.id-fl {
     float: right;
     font-size: 10px;
     margin: 10px 0px;
-    position: relative;
-    top: 70px;
+    position: absolute;
+    bottom: 0px;
+    right: 15px
 }
 
 i.fa.fa-heart-o.iv-cart-icon {
@@ -743,9 +759,11 @@ span.pv-btn-l:hover, span.pv-btn-r:hover{
 }
 
 .pv-rate-icons {
-    margin-left: 37%;
+    /* margin-left: 37%; */
     /* line-height: 0px; */
     padding-top: 10px;
+    position: absolute;
+    right: 32px;
 }
 
 .pv-rate-des {
@@ -762,7 +780,8 @@ span.pv-btn-l:hover, span.pv-btn-r:hover{
 }
 
 .pv-rate-loc-time {
-    margin-left: 50%;
+    position: absolute;
+    right: 40px;
 }
 
 .pv-sellerDesp {
