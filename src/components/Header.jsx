@@ -5,7 +5,7 @@ import { faSearch, faComment, faBell, faAngleDown, faPlus } from '@fortawesome/f
 import LoginModal from './LoginModal'
 
 import { connect } from 'react-redux';
-import { signup, login, setUser, getAllAdds } from '../store/action'
+import { signup, login, setUser, getAllAdds, searchAdds } from '../store/action'
 // import $ from "jquery";
 import { Link } from "react-router-dom";
 
@@ -39,6 +39,10 @@ class Header extends Component {
             position: "relative",
             bottom: "5px"
         };
+
+        const seachAgain = ()=> {
+            this.props.searchAdds({location: this.state.locationInput, search: this.state.searching})
+        }
 
         const icons = <div className="noti-icons col">            
 
@@ -97,7 +101,7 @@ class Header extends Component {
                                         search: this.state.searching,
                                         allAdds: this.props.adds}
                             }}>
-                                <button className="btn btn-outline-secondary main-search__btn" type="button">
+                                <button onClick={()=>{ seachAgain() }} className="btn btn-outline-secondary main-search__btn" type="button">
                                     <FontAwesomeIcon icon={faSearch} style={{fontSize: '25px', color: 'white'}} />
                                 </button>
                             </Link>
@@ -128,7 +132,7 @@ const mapDispatchToProps = (dispatch)=> ({
     login: (data)=> dispatch(login(data)),
     setUser: (payload)=> { dispatch(setUser(payload)) },
     getAllAdds: ()=> { dispatch(getAllAdds() )},
-
+    searchAdds: (obj)=> { dispatch(searchAdds(obj))},
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

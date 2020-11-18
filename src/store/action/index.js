@@ -142,6 +142,19 @@ const changeItemsView = (val)=> {
         dispatch({ type: "CHANGEITEMVIEW", payload: val})
     }
 }
+
+const searchAdds = (searchAttr)=> {
+    // console.log(searchAttr)
+    return (dispatch)=>{
+        dispatch({ type: "SEARCHPARA", payload: searchAttr})
+    }
+}
+
+const changeHandleSearch = ()=> {
+    return (dispatch)=>{
+        dispatch({ type: "CHANGEHANDLESEARCH"})
+    }
+}
 export {
     setState,
     signup,
@@ -152,5 +165,7 @@ export {
     getAllAdds,
     forwordSlider,
     backwordSlider,
-    changeItemsView
+    changeItemsView,
+    searchAdds,
+    changeHandleSearch
 }

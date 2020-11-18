@@ -6,7 +6,8 @@ const InitialState = {
     sliderAddsLength: null,
     currentSlider: 0,
     productView: 0,
-
+    searchParameter: {},
+    searchHandle: 0
 }
 
 export default ( state = InitialState, action ) => {
@@ -45,6 +46,19 @@ export default ( state = InitialState, action ) => {
             return ({
                 ...state,
                 productView: action.payload
+            })
+
+        case 'SEARCHPARA':
+            return ({
+                ...state,
+                searchParameter: action.payload,
+                searchHandle: 1
+            })
+            
+        case 'CHANGEHANDLESEARCH':
+            return ({
+                ...state,
+                searchHandle: 0
             })
 
         default:

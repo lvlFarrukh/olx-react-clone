@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
+import { changeHandleSearch } from '../store/action'
 
 // import Components
 import Header from '../components/Header'
@@ -27,23 +28,46 @@ class ItemView extends React.Component {
     }
     
     componentDidMount() {
-        const filterAddsData = ()=> {
+        const filterAddsData = (data)=> {
             let filerAdds = this.props.location.state.allAdds.filter((v)=>{
-                return ( v.City.toLowerCase() === this.props.location.state.location.toLowerCase()
-                || v.state.toLowerCase() === this.props.location.state.location.toLowerCase()) 
-                    && (v.catagory.toLowerCase() === this.props.location.state.search.toLowerCase()
-                    || v.title.toLowerCase().includes(this.props.location.state.search.toLowerCase()) )
+                return ( v.City.toLowerCase() === data.location.toLowerCase()
+                || v.state.toLowerCase() === data.location.toLowerCase()) 
+                    && (v.catagory.toLowerCase() === data.search.toLowerCase()
+                    || v.title.toLowerCase().includes(data.search.toLowerCase()) )
             })
 
             this.setState({
                 filterAdds: filerAdds,
                 addsLength: filerAdds.length
             })
+
         }
-        filterAddsData()    
+        filterAddsData(this.props.location.state)    
+    }
+
+    componentDidUpdate(){
+        const seachingAdds = ()=> {
+            let filerAdds = this.props.location.state.allAdds.filter((v)=>{
+                return ( v.City.toLowerCase() === this.props.searchParameter.location.toLowerCase()
+                || v.state.toLowerCase() === this.props.searchParameter.location.toLowerCase()) 
+                    && (v.catagory.toLowerCase() === this.props.searchParameter.search.toLowerCase()
+                    || v.title.toLowerCase().includes(this.props.searchParameter.search.toLowerCase()) )
+            })
+
+            this.setState({
+                filterAdds: filerAdds,
+                addsLength: filerAdds.length
+            })
+
+            this.props.changeHandleSearch();
+        }
+
+        if (this.props.searchHandle === 1){
+            seachingAdds()
+        }
     }
     render() {
-       
+        
         return(
             <div>
 
@@ -132,10 +156,13 @@ class ItemView extends React.Component {
 
 const mapStateToProps = (state) => ({ 
     adds: state.adds.allProduct,
-    productView: state.adds.productView
+    productView: state.adds.productView,
+    searchParameter: state.adds.searchParameter,
+    searchHandle: state.adds.searchHandle
 })
     
 const mapDispatchToProps = (dispatch)=> ({
+    changeHandleSearch: ()=> { dispatch(changeHandleSearch())}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemView);
