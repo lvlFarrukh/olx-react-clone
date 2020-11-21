@@ -1,9 +1,14 @@
 import React from 'react'
+import { Link } from "react-router-dom";
+
+import { connect } from 'react-redux';
+
+import  { addChatUser } from '../store/action/chatapp'
 
 class PvContact extends React.Component {
    
     render() {
-        // console.log(this.props.uid)
+        const addUser = ()=> { this.props.addChatUser(JSON.parse(localStorage.user).id, this.props.uid) }
         return(
 
             <div className="pv-sellerDesp">
@@ -24,8 +29,23 @@ class PvContact extends React.Component {
                     </div>
                 </div>
 
-                <div className="pv-sd-btn">
-                    <button>Chat With seller</button>
+                <div className="pv-sd-div-btn">
+                    {localStorage.user !== undefined &&
+                    this.props.uid === JSON.parse(localStorage.getItem('user')).id ? 
+                        <button className="pv-sd-btn">
+                            My own Add
+                        </button>
+                    :
+                        <Link to={{
+                            pathname: "/chat",
+                            state: {user: localStorage.getItem('user').id,
+                                    chatUid: this.props.uid}
+                        }}>
+                            <button onClick={()=> {addUser()}} className="pv-sd-btn">
+                                Chat to Seller
+                            </button>
+                        </Link>
+                    }
                 </div>
 
                 <div>
@@ -48,4 +68,12 @@ class PvContact extends React.Component {
     }
 }
 
-export default PvContact
+const mapStateToProps = (state) => ({ 
+   
+})
+    
+const mapDispatchToProps = (dispatch)=> ({
+    addChatUser: (uid, chatuid)=> {dispatch(addChatUser(uid, chatuid))}
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PvContact);

@@ -6,6 +6,7 @@ import Home from '../pages/Home'
 import ItemView from '../pages/ItemView'
 import ProductView from '../pages/ProductView'
 import AddPost from '../pages/AddProduct'
+import ChatApp from '../pages/ChatApp';
 
 class AppRouters extends React.Component {
     render(){
@@ -15,6 +16,8 @@ class AppRouters extends React.Component {
                 <Route path="/items" component={ItemView} />
                 <Route path="/productview" component={ProductView} />
                 <Route path="/post" component={AddPost} />
+                <Route path="/post" component={AddPost} />
+                <Route path="/chat" component={ChatApp} />
             </Router>
 
         )

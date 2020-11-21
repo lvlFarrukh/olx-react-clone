@@ -7,11 +7,13 @@ const InitialState = {
     currentSlider: 0,
     productView: 0,
     searchParameter: {},
-    searchHandle: 0
+    searchHandle: 0,
+    subFilters: null,
+    checkBoxCatagory: []
 }
 
 export default ( state = InitialState, action ) => {
-    // console.log("action==>", action)
+    // console.log("action==>", action.payload)
     switch (action.type) {
         case 'INITIALIZEPRODUCT':
             return ({
@@ -60,7 +62,12 @@ export default ( state = InitialState, action ) => {
                 ...state,
                 searchHandle: 0
             })
-
+            
+        case 'SUBFILTER':
+            return ({
+                ...state,
+                subFilters: action.payload
+            })
         default:
             break;
     }

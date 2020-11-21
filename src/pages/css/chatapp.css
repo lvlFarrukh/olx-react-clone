@@ -1,0 +1,114 @@
+.mainChatapp__div { 
+    padding: 0px !important;
+    overflow-y: hidden;
+}
+
+.chatapp__maindiv {
+    margin: 0px !important;
+}
+
+.chatUser {
+    padding: 0px !important;
+}
+
+.chatApp__users {
+    height: 84.2vh;
+    overflow-y: scroll;
+    border: 1px solid lightgray;
+    /* padding: 10px 20px; */
+}
+
+.__users h4 {
+    padding: 10px;
+    text-indent: 5px;
+}
+
+.__users {
+    height: 50px;
+    border: 2px solid darkgray;
+    margin: 2px 0px;
+    border-radius: 3px;
+}
+
+.__users:hover {
+    background-color: darkgray;
+    cursor: pointer;
+}
+
+.msg {
+    padding: 0px!important;
+}
+
+.send__msg {
+    position: fixed;
+    bottom: 0px;
+}
+
+.send__msg input {
+    margin-left: 25px !important;
+    outline: none;
+    width: 780px;
+    height: 7vh;
+    font-size: 2vw;
+    border: 3px solid gray;
+    text-indent: 16px;
+    border-radius: 30px;
+    color: rgb(46, 46, 46);
+}
+
+.send__msg button {
+    text-align: center;
+    margin: 0px 17px;
+    width: 100px;
+    border-radius: 50px;
+    outline: none;
+    border: none;
+    background: gray;
+    font-size: 2vw;
+    color: white;
+    font-weight: bold;
+}
+
+.send__msg button:hover {
+    background-color: rgb(95, 95, 95);
+    font-size: 2.1vw;
+}
+
+.send__msg input:focus{
+    border-width: 4px;
+    border-color: rgb(95, 95, 95);
+}
+
+.msg__user {
+    overflow-y: scroll;
+    height: 75vh;
+    padding: 20px;
+}
+
+.user__msg {
+    background: lightgrey;
+    border-radius: 18px;
+    padding: 3px 10px;
+    width: fit-content;
+    margin: 3px;
+}
+
+.user__msg h4, .chatUser__msg h4 {
+    margin: 0px;
+}
+
+.chatUser__msg {
+    background: lightcyan;
+    border-radius: 18px;
+    padding: 3px 10px;
+    width: fit-content;
+    margin: 3px;
+    position: relative;
+    left: 86%;
+}
+
+.chatUser__msg p {
+    margin: 0px;
+    color: gray;
+    font-size: 0.9vw;
+}

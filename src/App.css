@@ -631,6 +631,17 @@ p.l-gray.id-fl {
     right: 15px
 }
 
+.dropLogout p {
+    padding: 0px 10px;
+    font-size: 20px;
+}
+
+.dropLogout p:hover {
+    font-size: 22px;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
 i.fa.fa-heart-o.iv-cart-icon {
     float: right;
     font-size: 20px;
@@ -844,13 +855,13 @@ span.pv-sd-n2 {
     font-size: 2vw;
 }
 
-.pv-sd-btn {
+.pv-sd-div-btn {
     margin-top: 10px;
     width: 100%;
     margin-bottom: 20px;
 }
 
-.pv-sd-btn button {
+.pv-sd-btn {
     width: 100%;
     height: 40px;
     background-color: #103034;
@@ -860,7 +871,7 @@ span.pv-sd-n2 {
     border-radius: 4px;
 }
 
-.pv-sd-btn button:hover {
+.pv-sd-btn:hover {
     background-color: white;
     border: 4px solid #103034;
     color: #103034;

@@ -14,12 +14,17 @@ class AddProduct extends React.Component {
         
         this.state = {
             subcatagoey: {
-                Vehicle : ['Car on installments', 'Car Accessories', 'Bus, van, truck', 'other vehicle'],
+                Vehicle : ['Car', 'Car Accessories', 'Bus, van, truck', 'other vehicle'],
                 Bike: ['Motorcycle', 'spare parts', 'Bicycles', 'other bikes'],
-                Mobile: ['Mobile Phones', 'Accessories', 'Tablets', 'other'],
-                Property: ['House', 'Plots', 'Apartment', 'Shop', 'other']  
+                Mobile: ['Mobile Phones', 'Accessories', 'Tablet', 'other'],
             },
-            selectedCat : ['Car on installments', 'Car Accessories', 'Bus, van, truck', 'other vehicle'],
+            selectedCat: ['Car', 'Car Accessories', 'Bus, van, truck', 'other vehicle'],
+
+            companyList: {
+                Vehicle: ['Honda', 'Corolla', 'City', 'Other'],
+                Bike: ['Honda', 'Super power', 'Unique', 'Super star', 'Other'],
+                Mobile: ['Apple', 'Huawie', 'Samsung', 'Other'],
+            },
 
             city: {
                 Sindh: ['badin','dadu','hydrabad','karachi', 'other'],
@@ -50,11 +55,12 @@ class AddProduct extends React.Component {
 
     componentDidMount() {
         if (this.props.user[0].uid === ""){
+            alert("Please login First")
             this.props.history.push("/");
         }
     }
-    render(){
 
+    componentDidUpdate() {
         if (this.props.successUpload){
             alert('Add Successfully Posted!');
             this.setState({
@@ -68,6 +74,8 @@ class AddProduct extends React.Component {
             })
             this.props.setUploadStatus();
         }
+    }
+    render(){
 
         const selectSubCat = (value)=> {
             this.setState({
@@ -96,12 +104,11 @@ class AddProduct extends React.Component {
             obj['City'] = this.state.City;
             obj['imagesURL'] = this.state.allImageName;
             obj['postDate'] = [date.getDay(), date.getMonth(), date.getFullYear()]
-
             this.props.postAdd(obj)
             // console.log(this.state.allImageName)
         }
 
-        const getURL = async (storageRef)=> {
+        const getURL = (storageRef)=> {
             
             const UploadImg = new Promise(function(resolve, reject) {
                 storageRef.getDownloadURL().then(function(url) {
@@ -125,6 +132,7 @@ class AddProduct extends React.Component {
             // let imageNames = [...this.state.allImageName, imageName]
             let storageRef = storage.ref('olx post/'+imageName);
             var task = storageRef.put(file[0]);
+            // console.log(file[0])
 
             task.on('state_changed', 
             (snapshot)=> {
@@ -165,7 +173,6 @@ class AddProduct extends React.Component {
                                     <option value="Vehicle">Vehicles</option>
                                     <option value="Bike">Bike</option>
                                     <option value="Mobile">Mobile</option>
-                                    <option value="Property">Property</option>
                                 </select>
                             </label>
                             
@@ -203,19 +210,28 @@ class AddProduct extends React.Component {
 
                                 {/* type */}
                                 
-                                <label htmlFor="type-apple" className="form__label">Apple
-                                    <input onChange={(e)=> { this.setState({company: e.target.value})}} style={{marginLeft: "5px", marginRight: "20px"}} className="condition-radio" type="radio" name="type" value="apple" id="type-apple"/>
-                                </label>
-                                <label htmlFor="type-danny" className="form__label">Danny Tab
-                                    <input onChange={(e)=> { this.setState({company: e.target.value})}} style={{marginLeft: "5px", marginRight: "20px"}} className="condition-radio" type="radio" name="type" value="danny tab" id="type-danny"/>
-                                </label>
-                                <label htmlFor="type-samsung" className="form__label">Samsung
-                                    <input onChange={(e)=> { this.setState({company: e.target.value})}} style={{marginLeft: "5px", marginRight: "20px"}} className="condition-radio" type="radio" name="type" value="samsung" id="type-samung"/>
-                                </label>
-                                
-                                <label htmlFor="type-other" className="form__label">other
-                                    <input onChange={(e)=> { this.setState({company: e.target.value})}} style={{marginLeft: "5px", marginRight: "20px"}} className="condition-radio" type="radio" name="type" value="other" id="type-other"/>
-                                </label>
+                                {this.state.catagory === "Vehicle" &&
+                                 this.state.companyList.Vehicle.map((v,i)=> {
+                                    return <label key={i} htmlFor={v} className="form__label">{v}
+                                                <input onChange={(e)=> { this.setState({company: e.target.value})}} style={{marginLeft: "5px", marginRight: "20px"}} className="condition-radio" type="radio" name={v} value={v} id={v}/>
+                                            </label>
+                                 }) }
+
+                                {this.state.catagory === "Bike" &&
+                                 this.state.companyList.Bike.map((v,i)=> {
+                                    return <label key={i} htmlFor={v} className="form__label">{v}
+                                                <input onChange={(e)=> { this.setState({company: e.target.value})}} style={{marginLeft: "5px", marginRight: "20px"}} className="condition-radio" type="radio" name={v} value={v} id={v}/>
+                                            </label>
+                                 }) }
+
+{                               this.state.catagory === "Mobile" &&
+                                 this.state.companyList.Mobile.map((v,i)=> {
+                                    return <label key={i} htmlFor={v} className="form__label">{v}
+                                                <input onChange={(e)=> { this.setState({company: e.target.value})}} style={{marginLeft: "5px", marginRight: "20px"}} className="condition-radio" type="radio" name={v} value={v} id={v}/>
+                                            </label>
+                                 }) }
+                               
+
                                 <hr/>
 
                                 {/* Title */}
@@ -246,7 +262,7 @@ class AddProduct extends React.Component {
                                 <label htmlFor="picture" className="form__label">
                                     Picture*<br/>
                                     <input onChange={(e)=> { 
-                                            this.setState({image: [...this.state.image,e.target.files[0]]})
+                                            this.setState({image: e.target.files})
                                             this.setState({btnDisplay: true});
                                         }} type="file" name="picture" id="picture" className="" required/>
                                     <br/>

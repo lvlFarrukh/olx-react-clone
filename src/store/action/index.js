@@ -1,5 +1,28 @@
-import { auth, db} from '../../config/firebase' 
+import { auth, db,} from '../../config/firebase' 
 
+
+// const loginWithFacebook = ()=>{
+//     return (dispatch)=> {
+//         var provider = new firebaseApp.auth.FacebookAuthProvider();
+//         firebaseApp.auth().signInWithPopup(provider)
+//             .then(function(result) {
+//                 var token = result.credential.accessToken;
+//                 // The signed-in user info.
+//                 var user = result.user;
+//                 // ...
+//                 console.log("user==>",user)
+//             }).catch(function(error) {
+//                 // Handle Errors here.
+//                 var errorCode = error.code;
+//                 var errorMessage = error.message;
+//                 // The email of the user's account used.
+//                 var email = error.email;
+//                 // The firebase.auth.AuthCredential type that was used.
+//                 var credential = error.credential;
+//                 // ...
+//             });
+//         }
+// }
 
 const setUploadStatus = ()=> {
     return (dispatch)=> {
@@ -39,6 +62,10 @@ const signup = data => {
         signupPromise
         .then( uid => { 
             data['id'] = uid;
+            data['chatUsers'] = [];
+
+            db.ref(`users/${data.id}`).set(data);
+
             dispatch({type: 'setAuthData', data: data});
         })
         .catch( error => { 
@@ -69,6 +96,8 @@ const login = data => {
         loginPromise
         .then( uid => { 
             data['id'] = uid;
+            db.ref(`users/${data.id}`).set(data);
+
             data['imageUrl'] = "";
             delete data['password'];
             localStorage.setItem('user', JSON.stringify(data));
@@ -155,6 +184,26 @@ const changeHandleSearch = ()=> {
         dispatch({ type: "CHANGEHANDLESEARCH"})
     }
 }
+
+const subFilter = (obj)=> {
+    return (dispatch)=> {
+        switch (obj.type) {
+            case "company":
+                dispatch({type: "SUBFILTER", payload: obj.action})
+                break;
+            
+            case "condition":
+                    dispatch({type: "SUBFILTER", payload: obj.action})
+                break
+        
+            default:
+                dispatch({type: "SUBFILTER", payload: null})
+                console.log("working")
+                break;
+        }
+    }
+}
+
 export {
     setState,
     signup,
@@ -167,5 +216,7 @@ export {
     backwordSlider,
     changeItemsView,
     searchAdds,
-    changeHandleSearch
+    changeHandleSearch,
+    subFilter,
+    // loginWithFacebook
 }

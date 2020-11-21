@@ -3,6 +3,8 @@ import LOGO from '../media/olx_logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faComment, faBell, faAngleDown, faPlus } from '@fortawesome/free-solid-svg-icons'
 import LoginModal from './LoginModal'
+import {auth} from '../config/firebase.js';
+
 
 import { connect } from 'react-redux';
 import { signup, login, setUser, getAllAdds, searchAdds } from '../store/action'
@@ -30,7 +32,18 @@ class Header extends Component {
         }
     }
     render(){ 
-        // console.log(this.props)
+        
+        const logout = ()=>{
+            localStorage.clear();
+            auth.signOut().then(function() {
+                // Sign-out successful.
+              }).catch(function(error) {
+                // An error happened.
+              });
+        }
+
+        
+
         const loginStyle = {
             display: "inline", 
             textDecoration: "underline",
@@ -44,6 +57,7 @@ class Header extends Component {
             this.props.searchAdds({location: this.state.locationInput, search: this.state.searching})
         }
 
+        // console.log(this.props.user[0].id)
         const icons = <div className="noti-icons col">            
 
             { this.props.user[0].uid === "" ?   
@@ -55,8 +69,12 @@ class Header extends Component {
                     <FontAwesomeIcon style={{margin: "5px"}} icon={faBell} className="cIcon"/>
 
                     <img src={this.props.user[0].imageUrl === "" ? LOGO : this.props.user[0].imageUrl} style={{margin: "5px"}} alt="user" className="rounded-circle" width="40px" height="40px" />
-                    <FontAwesomeIcon style={{marginLeft: "0px"}} icon={faAngleDown} className="cIcon"/>
                     
+
+                        <FontAwesomeIcon style={{marginLeft: "0px"}} icon={faAngleDown} className="cIcon" type="button" data-toggle="dropdown"/>
+                        <div className="dropdown-menu dropLogout">
+                            <p onClick={()=> {logout()}}>Log out</p>
+                        </div>
                 </span>
 
             }

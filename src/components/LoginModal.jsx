@@ -2,7 +2,7 @@ import React from 'react'
 
 // redux action functions
 import { connect } from 'react-redux';
-import { signup, login } from '../store/action'
+import { signup, login,  } from '../store/action'
 
 class LoginModal extends React.Component{
     constructor() {
@@ -38,8 +38,8 @@ class LoginModal extends React.Component{
                                 className="btn btn-secondary" style={{width: "41%", margin: '20px'}}>Login
                             </button>
                             
-                            <h4 style={{margin: "5px 46%"}}>or</h4>
-                            <button className="btn btn-primary" style={{width: "95%", margin: '10px'}}>Continue from Facebook</button>
+                            {/* <h4 style={{margin: "5px 46%"}}>or</h4>
+                            <button onClick={()=> {this.props.loginWithFacebook()}} className="btn btn-primary" style={{width: "95%", margin: '10px'}}>Continue from Facebook</button> */}
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,8 @@ const mapStateToProps = (state) => ({
     
 const mapDispatchToProps = (dispatch)=> ({
     signup: (data)=> dispatch(signup(data)),
-    login: (data)=> dispatch(login(data))
+    login: (data)=> dispatch(login(data)),
+    // loginWithFacebook: (data)=> dispatch(loginWithFacebook(data)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
