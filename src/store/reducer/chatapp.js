@@ -2,7 +2,8 @@ const InitialState = {
     allChatUser: {},
     chatUsers: [],
     chatUserObj: {},
-    messages: [],
+    currentMessages: [],
+    currentCUid: "" 
 }
 
 export default ( state = InitialState, action ) => {
@@ -26,6 +27,23 @@ export default ( state = InitialState, action ) => {
                 chatUserObj: action.payload
             })
 
+        case 'SETMESSAGES':
+            return ({
+                ...state,
+                currentMessages: action.payload,
+            })
+
+        // case 'ADDMSG':
+        //     return ({
+        //         ...state,
+        //         currentMessages: [...state.currentMessages, action.payload],
+        //     })
+            
+        case 'SETCU':
+            return ({
+                ...state,
+                currentCUid: action.payload
+            })
         default:
             break;
     }

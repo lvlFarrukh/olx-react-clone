@@ -18,7 +18,7 @@
     /* padding: 10px 20px; */
 }
 
-.__users h4 {
+.__users h4, .activeUser h4 {
     padding: 10px;
     text-indent: 5px;
 }
@@ -93,6 +93,12 @@
     margin: 3px;
 }
 
+.user__msg p {
+    margin: 0px;
+    color: gray;
+    font-size: 0.9vw;
+}
+
 .user__msg h4, .chatUser__msg h4 {
     margin: 0px;
 }
@@ -103,12 +109,20 @@
     padding: 3px 10px;
     width: fit-content;
     margin: 3px;
-    position: relative;
-    left: 86%;
+    /* position: relative;
+    left: 86%; */
 }
 
 .chatUser__msg p {
     margin: 0px;
     color: gray;
     font-size: 0.9vw;
+}
+
+.activeUser {
+    height: 50px;
+    border: 2px solid darkgray;
+    margin: 2px 0px;
+    border-radius: 3px;
+    background-color: darkgray !important;
 }
