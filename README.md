@@ -1,8 +1,8 @@
-This project was hosted in [olx Replica](www.olx-clone-react-2f5ec.web.app).
+This project was hosted in (olx-clone-react-2f5ec.web.app).
 
 ### `Project Description`
 
-This project is the replica of [olx.com](olx.com). In this project I can create use first login and then they can add any product for sell.
+This project is the replica of (olx.com). In this project I can create use first login and then they can add any product for sell.
 Other use that can show all product that can be added, they can chat with seller by chap app in it.
 
 ### `Software used`
