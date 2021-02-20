@@ -38,13 +38,21 @@ class PvContact extends React.Component {
                     :
                         <Link to={{
                             pathname: "/chat",
-                            state: {user: localStorage.getItem('user').id,
+                            state: {user: localStorage.getItem('user') && localStorage.getItem('user').id,
                                     chatUid: this.props.uid}
                         }}>
-                            <button onClick={()=> {addUser()}} className="pv-sd-btn">
-                                Chat to Seller
-                            </button>
+                            {localStorage.getItem('user') && 
+                                <button onClick={()=> {addUser()}} className="pv-sd-btn">
+                                    Chat to Seller
+                                </button>
+                            }
                         </Link>
+
+                    }
+                    {!localStorage.getItem('user') && 
+                        <button className="pv-sd-btn">
+                            Chat with Seller LOGIN first
+                        </button>
                     }
                 </div>
 

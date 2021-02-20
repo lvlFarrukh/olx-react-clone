@@ -29,7 +29,7 @@ class ItemView extends React.Component {
     }
     
     componentDidMount() {
-        setTimeout(()=>{ this.setState({checkBoxCat: this.state.filterAdds[0].catagory}) }, 2000)
+        setTimeout(()=>{ this.setState({checkBoxCat: this.state.filterAdds[0].catagory}) }, 4000)
         const filterAddsData = (data)=> {
             let filerAdds = this.props.location.state.allAdds.filter((v)=>{
                 return ( v.City.toLowerCase() === (data.location === null ? v.City.toLowerCase() : data.location.toLowerCase())
