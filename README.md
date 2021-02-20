@@ -1,4 +1,4 @@
-This project was hosted in [olx Replica](olx-clone-react-2f5ec.web.app).
+This project was hosted in [olx Replica](www.olx-clone-react-2f5ec.web.app).
 
 ### `Project Description`
 
