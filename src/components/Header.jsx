@@ -54,7 +54,7 @@ class Header extends Component {
         };
 
         const seachAgain = ()=> {
-            this.props.searchAdds({location: this.state.locationInput, search: this.state.searching})
+            this.props.searchAdds({location: this.state?.locationInput, search: this.state?.searching})
         }
 
         // console.log(this.props.user[0].id)
@@ -80,7 +80,7 @@ class Header extends Component {
             }
 
             <Link to="/post">
-                <button className="sellB">
+                <button className="sellB" style={{marginTop: 15}}>
                     <FontAwesomeIcon icon={faPlus} />SELL
                 </button>
             </Link>
